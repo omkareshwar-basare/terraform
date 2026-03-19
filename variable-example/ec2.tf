@@ -9,22 +9,25 @@ resource "aws_instance" "example" {
 resource "aws_security_group" "allow_tls" {
   name        = var.sg_name
   description = var.sg_description
-  
+
   egress {
     from_port        = var.sg_from_port
     to_port          = var.sg_to_port
     protocol         = "-1"
-    cidr_blocks      = var.cidr_blocks
-    ipv6_cidr_blocks = ["::/0"]
+    cidr_blocks      = var.sg_cidr_blocks
+    ipv6_cidr_blocks = var.sg_ipv6_cidr_blocks
   }
 
 
-ingress {
+  ingress {
     from_port        = var.sg_from_port
     to_port          = var.sg_to_port
     protocol         = "-1"
-    cidr_blocks      = var.cidr_blocks
-    ipv6_cidr_blocks = ["::/0"]
+    cidr_blocks      = var.sg_cidr_blocks
+    ipv6_cidr_blocks = var.sg_ipv6_cidr_blocks
   }
 
   tags = var.sg_tags
+}
+
+ 
